@@ -14,7 +14,28 @@ of the entire grove, it holds the keys to the kingdom, making it a very likely t
    :includehidden:
    :caption: Breaching
 
-   docs/breaching/README.md
+   docs/breach/README.md
+   OSINT <https://tymyrddin.github.io/red-recon/docs/osint/README.html>
+   Phishing <https://tymyrddin.github.io/red-hurdles/docs/phishing/README.html>
+   docs/breach/ntlm.md
+   docs/breach/ldap.md
+   docs/breach/relays.md
+   docs/breach/mdt.md
+   docs/breach/config.md
+
+.. toctree::
+   :maxdepth: 1
+   :includehidden:
+   :caption: Enumerating
+
+   docs/enum/README.md
+
+.. toctree::
+   :maxdepth: 1
+   :includehidden:
+   :caption: Lateral movement and pivoting
+
+   docs/pivot/README.md
 
 .. toctree::
    :caption: Links
