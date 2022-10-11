@@ -1,8 +1,12 @@
 # Introduction
 
+| ![THM Network AD Breaching](../../_static/images/breaching.png)
+|:--:|
+| [THM Room: Breaching Active Directory](https://tryhackme.com/room/breachingad) |
+
 ## What?
 
-Acquire an initial set of valid Active Directory (AD) credentialsfor a way to authenticate to AD, allowing further 
+Acquire an initial set of valid Active Directory (AD) credentials for a way to authenticate to AD, allowing further 
 enumeration on AD. 
 
 ## Why?
