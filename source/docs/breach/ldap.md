@@ -82,3 +82,9 @@ will receive the following error: "This distinguished name contains invalid synt
 If you receive this error, you can use a tcpdump to capture the credentials:
 
     sudo tcpdump -SX -i breachad tcp port 389
+
+Or fire up Wireshark or tshark and find the cleartext bind request password.
+
+Stop the LDAP server.
+
+    sudo systemctl disable --now slapd
