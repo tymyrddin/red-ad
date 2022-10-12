@@ -6,7 +6,7 @@ Download the vpn config file from THM, and use it to configure
 
 Check PID (you get a number, if not, doesn't work):
 
-    sudo ps aux | grep -v grep | grep -i adenumeration | awk -v FS=' ' '{print $2}'
+    sudo ps aux | grep -v grep | grep -i <username>-adenumeration.ovpn | awk -v FS=' ' '{print $2}'
 
 Set your DNS IPv4 to the IP address of the THMDC in the network diagram, and run:
 

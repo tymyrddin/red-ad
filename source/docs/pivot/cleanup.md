@@ -1,16 +1,8 @@
 # Cleanup
 
-Remove the sharphound zip and directory. `bloodhound.zip` and `sharphound.exe`
-
-Close bloodhound.
-
-Stop neo4j:
-
-    neo4j stop
-
 To stop the vpn daemon started in [setup](setup.md), get PID:
 
-    sudo ps aux | grep -v grep | grep -i adenumeration | awk -v FS=' ' '{print $2}'
+    sudo ps aux | grep -v grep | grep -i <username>-lateralmovementandpivoting | awk -v FS=' ' '{print $2}'
     <PID>
 
 and kill the process:
