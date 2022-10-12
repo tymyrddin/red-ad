@@ -11,9 +11,9 @@ not compromised.
 
 ## How?
 
-* Moving through the network
-* Spawning processes remotely
-* Moving laterally using wmi
-* Use of alternate authentication material
-* Abusing user behaviour
-* Port forwarding
+* [Moving through the network](moving.md)
+* [Spawning processes remotely](spawning.md)
+* [Moving laterally using wmi](lateral.md)
+* [Use of alternate authentication material](auth.md)
+* [Abusing user behaviour](behaviour.md)
+* [Port forwarding](portforward.md)
