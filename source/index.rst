@@ -29,6 +29,13 @@ of the entire grove, it holds the keys to the kingdom, making it a very likely t
    :caption: Enumerating
 
    docs/enum/README.md
+   docs/enum/setup.md
+   docs/enum/injection.md
+   docs/enum/mmc.md
+   docs/enum/cmd.md
+   docs/enum/powershell.md
+   docs/enum/bloodhound.md
+   docs/enum/cleanup.md
 
 .. toctree::
    :maxdepth: 1

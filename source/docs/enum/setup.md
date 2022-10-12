@@ -12,7 +12,11 @@ Set your DNS IPv4 to the IP address of the THMDC in the network diagram, and run
 
     sudo systemctl restart NetworkManager
 
-Test. Get the credentials from the given link.
+Test:
+
+    nslookup thmdc.za.tryhackme.com
+
+Get your credentials from `http://distributor.za.tryhackme.com/creds`.
 
 You can now either login with `ssh`, for example:
 
@@ -24,4 +28,8 @@ You can now either login with `ssh`, for example:
     (c) 2018 Microsoft Corporation. All rights reserved.
 
 Or by RPD:
+
+| ![RDP access](../../_static/images/rdp-access.png) |
+|:--:|
+| The kali-share drive mounts the current working directory as a network drive <br>in the RDP session, for uploading and downloading files. |
 

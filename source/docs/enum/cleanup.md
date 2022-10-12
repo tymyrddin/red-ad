@@ -1,6 +1,6 @@
 # Cleanup
 
-Remove the bloodhound.zip and 
+Remove the sharphound zip and directory. `bloodhound.zip` and `sharphound.exe`
 
 Close bloodhound.
 

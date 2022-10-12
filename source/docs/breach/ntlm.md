@@ -10,7 +10,7 @@ internet. Examples:
 * Exposed VPN endpoints that were integrated with AD.
 * Web applications that are internet-facing and make use of NetNTLM.
 
-| ![Downgrade to ntlm](../../_static/images/outlook-ntlm-downgrade.png)
+| ![Downgrade to ntlm](../../_static/images/outlook-ntlm-downgrade.png) |
 |:--:|
 | The user is now either granted access or denied access, authorisation is performed on the <br>Exchange server with consultation of the msg.target.com Domain Controller. |
 
