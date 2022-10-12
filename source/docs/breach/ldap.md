@@ -28,7 +28,16 @@ LDAP Pass-back attacks can be performed when we gain access to a device's config
 are specified. This can be, for example, the web interface of a network printer. Often, the credentials for these 
 interfaces are kept to the default ones, such as `admin:admin` or `admin:password`. 
 
-In this case, we can not directly extract the LDAP credentials because the password is hidden. 
+| ![Test settings](../../_static/images/ldap-settings.png)
+|:--:|
+|  Test settings |
+
+In this case, we can not directly extract the LDAP credentials because the password is hidden: 
+
+| ![Test settings](../../_static/images/found-username.png)
+|:--:|
+|  We did find a username though. |
+
 But we can alter the LDAP configuration, such as the IP or hostname of the LDAP server. In an LDAP Pass-back attack, 
 we can modify this IP to our IP and then test the LDAP configuration, which will force the device to attempt 
 LDAP authentication to our rogue device. We can intercept this authentication attempt to recover the LDAP credentials.

@@ -51,7 +51,7 @@ Enumerate:
     ...
     2022-10-12T14:50:42.7872718+01:00|INFORMATION|SharpHound Enumeration Completed at 2:50 PM on 10/12/2022! Happy Graphing!
 
-Check results:
+Get name of results:
 
     PS C:\Users\kenneth.davies\Documents\SharpHound-v1.1.0> dir
     Directory: C:\Users\kenneth.davies\Documents\SharpHound-v1.1.0
