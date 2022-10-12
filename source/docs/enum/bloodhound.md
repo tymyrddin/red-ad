@@ -4,7 +4,27 @@ Bloodhound runs locally on an attacker's machine. The attacker must run a "colle
 to enumerate domain information. After the collector finishes running, it will output a series of .json files for 
 import into the Bloodhound interface.
 
-`ssh` into target machine using the credentials given:
+On the attack machine:
+
+    mkdir sharphound 
+    cd sharphound 
+    wget https://github.com/BloodHoundAD/SharpHound/releases/download/v1.1.0/SharpHound-v1.1.0.zip
+    --2022-10-12 14:20:23--  https://github.com/BloodHoundAD/SharpHound/releases/download/v1.1.0/SharpHound-v1.1.0.zip
+    ...
+    HTTP request sent, awaiting response... 200 OK
+    Length: 2138953 (2.0M) [application/octet-stream]
+    Saving to: ‘SharpHound-v1.1.0.zip’
+    
+    SharpHound-v1.1.0.z 100%[===================>]   2.04M  1.91MB/s    in 1.1s    
+    
+    2022-10-12 14:20:35 (1.91 MB/s) - ‘SharpHound-v1.1.0.zip’ saved [2138953/2138953]
+        
+Start a server to serve it:
+
+    python -m http.server 80
+    Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+
+Now `ssh` into target machine using the credentials given:
 
     ssh kenneth.davies@za.tryhackme.com@thmjmp1.za.tryhackme.com
 
@@ -69,9 +89,9 @@ Fire up `neo4j` and `bloodhound`:
 
 Drop the copied over results in the bloodhound window, and play around with options.
 
-| ![Bloodhound](../../_static/images/Screenshot from 2022-10-12 15-42-55.png)
+| ![Bloodhound](../../_static/images/bloodhound.png)
 |:--:|
-| Start playing around and answer the questions. |
+|  Start playing around and answer the questions. |
 
 * Use `Search for a node...` to find specific users, groups, etc.
 * Click on specific properties of an object to visualise it
