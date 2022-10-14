@@ -231,6 +231,20 @@ To receive the reverse shell, run a listener on the attack machine:
 
     nc -nlvp 5556
 
-    
+## Get the flag
 
+The given credentials will grant administrative access to THMJMP2, allowing for the use of mimikatz to dump the 
+authentication material needed for any of the applied techniques. Both mimikatz and psexec64 are available at 
+`C:\tools` on THMJMP2.
+
+Using an `ssh` session, use `mimikatz` to extract authentication material and perform Pass-the-Hash, Pass-the-Ticket 
+or Pass-the-Key against domain user t1_toby.beck.
+
+Once you have a command prompt with his credentials loaded, use `winrs` to connect to a command prompt on THMIIS. 
+Since t1_toby.beck's credentials are already injected in your session as a result of the attacks, you can use `winrs` 
+without specifying any credentials, and it will use the ones available to your current session:
+
+    winrs.exe -r:THMIIS.za.tryhackme.com cmd
+
+You'll find a flag on t1_toby.beck's desktop on THMIIS. 
 
