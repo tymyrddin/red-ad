@@ -1,13 +1,13 @@
 # Spawning processes remotely
 
-| Remote Session           | Port(s)                  | Requirements                               |
-|--------------------------|--------------------------|--------------------------------------------|
-| PsExec                   | TCP/445                  | Account must be an administrator           |
-| WinRM over HTTP          | TCP/5985                 | Group Memberships: Remote Management Users |
-| WinRM over HTTPS         | TCP/5986                 | Group Memberships: Remote Management Users |
-| DCE/RPC                  | TCP/135, TCP/49152-65535 | Group Memberships: Administrators          |
-| RPC over SMB Named Pipes | TCP/445                  | Group Memberships: Administrators          |
-| RPC over SMB Named Pipes | TCP/139                  | Group Memberships: Administrators          |
+| Remote Session           | Port(s)                     | Requirements                               |
+|--------------------------|-----------------------------|--------------------------------------------|
+| PsExec                   | TCP/445                     | Account must be an administrator           |
+| WinRM over HTTP          | TCP/5985                    | Group Memberships: Remote Management Users |
+| WinRM over HTTPS         | TCP/5986                    | Group Memberships: Remote Management Users |
+| DCE/RPC                  | TCP/135,<br>TCP/49152-65535 | Group Memberships: Administrators          |
+| RPC over SMB Named Pipes | TCP/445                     | Group Memberships: Administrators          |
+| RPC over SMB Named Pipes | TCP/139                     | Group Memberships: Administrators          |
 
 ## PsExec
 
