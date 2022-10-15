@@ -120,11 +120,11 @@ Cracking:
     john --format=netntlmv2 hash.txt
     hashcat -m 5600 -a 3 hash.txt
 
-## Pass-the-hash (PtH)
+## Pass-the-hash
 
 The NTLM challenge sent during authentication can be responded to just by knowing the password hash. Instead of 
 having to crack NTLM hashes, if the Windows domain is configured to use NTLM authentication, we can pass-the-hash 
-for authentication.
+(PtH) for authentication.
 
 Assuming NTLMv2, To extract NTLM hashes, use `mimikatz` to read the local SAM or extract hashes directly from `LSASS` 
 memory.
@@ -404,7 +404,7 @@ THMIIS
 C:\>
 ```
 
-## Kerberos
+### Kerberos
 
 Dump:
 
