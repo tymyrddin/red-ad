@@ -86,7 +86,7 @@ Cleanup:
 
     schtasks /s target-ip /tn "Task" /DELETE /F
 
-## Get flag
+## Flag
 
 Leverage a session on the jump host to deliver a payload to an IIS web server. The payload will connect back to 
 the attack machine (Kali VM in my case).
