@@ -53,6 +53,21 @@ of the entire grove, it holds the keys to the kingdom, making it a very likely t
    docs/pivot/cleanup.md
 
 .. toctree::
+   :maxdepth: 1
+   :includehidden:
+   :caption: Exploiting
+
+   docs/exploit/README.md
+   docs/exploit/setup.md
+   docs/exploit/permissions.md
+   docs/exploit/kerberos.md
+   docs/exploit/relays.md
+   docs/exploit/users.md
+   docs/exploit/gpos.md
+   docs/exploit/certificates.md
+   docs/exploit/trusts.md
+
+.. toctree::
    :caption: Links
 
    Red Team <https://tymyrddin.github.io/red/>
