@@ -1,4 +1,4 @@
-# Setup
+# Setup for THM AD
 
 Download the vpn config file from THM, and use it to configure 
 

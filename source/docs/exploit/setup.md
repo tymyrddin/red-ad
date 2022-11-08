@@ -1,4 +1,4 @@
-# Setup
+# Setup for THM AD
 
 ## Connecting to the network
 
