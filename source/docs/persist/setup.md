@@ -4,11 +4,11 @@
 
 Download the vpn config file from THM, and use it to configure 
 
-    sudo openvpn --config ./<some assigned code>-exploitingad.ovpn --daemon
+    sudo openvpn --config ./<some assigned code>-persistingad.ovpn --daemon
 
 Check PID (you get a number, if not, does not work):
 
-    sudo ps aux | grep -v grep | grep -i <some assigned code>-exploitingad.ovpn | awk -v FS=' ' '{print $2}'
+    sudo ps aux | grep -v grep | grep -i <some assigned code>-persistingad.ovpn | awk -v FS=' ' '{print $2}'
 
 ## Edit DNS configuration
 
