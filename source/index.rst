@@ -83,6 +83,20 @@ of the entire grove, it holds the keys to the kingdom, making it a very likely t
    docs/persist/gpos.md
 
 .. toctree::
+   :maxdepth: 1
+   :includehidden:
+   :caption: Credentials harvesting
+
+   docs/harvest/README.md
+   docs/harvest/access.md
+   docs/harvest/lwc.md
+   docs/harvest/lsass.md
+   docs/harvest/wcm.md
+   docs/harvest/dc.md
+   docs/harvest/laps.md
+   docs/harvest/hashes.md
+
+.. toctree::
    :caption: Links
 
    Red Team <https://tymyrddin.github.io/red/>
