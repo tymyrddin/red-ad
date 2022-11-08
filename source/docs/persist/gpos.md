@@ -15,6 +15,10 @@ Common GPO Persistence Techniques
 * Firewall Tampering
 * Anti-Virus Tampering
 
+## Resources
+
+* [Sneaky Active Directory Persistence #17: Group Policy](https://adsecurity.org/?p=2716)
+
 
 
 
