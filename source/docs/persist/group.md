@@ -1,0 +1,1 @@
+# Persistence through group membership

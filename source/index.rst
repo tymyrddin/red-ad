@@ -68,6 +68,21 @@ of the entire grove, it holds the keys to the kingdom, making it a very likely t
    docs/exploit/trusts.md
 
 .. toctree::
+   :maxdepth: 1
+   :includehidden:
+   :caption: Persisting
+
+   docs/persist/README.md
+   docs/persist/setup.md
+   docs/persist/creds.md
+   docs/persist/tickets.md
+   docs/persist/certs.md
+   docs/persist/sid.md
+   docs/persist/group.md
+   docs/persist/acls.md
+   docs/persist/gpos.md
+
+.. toctree::
    :caption: Links
 
    Red Team <https://tymyrddin.github.io/red/>

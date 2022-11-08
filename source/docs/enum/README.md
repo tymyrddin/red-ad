@@ -15,7 +15,7 @@ to execute and reach our goals.
 
 ## How?
 
-* [Setup](setup.md)
+* [Setup for THM AD](setup.md)
 * [Credential injection](injection.md)
 * [Through Microsoft Management Console](mmc.md)
 * [Through Command Prompt](cmd.md)

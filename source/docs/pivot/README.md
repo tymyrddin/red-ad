@@ -15,7 +15,7 @@ not compromised.
 
 ## How?
 
-* [Setup](setup.md)
+* [Setup for THM AD](setup.md)
 * [Moving through the network](moving.md)
 * [Spawning processes remotely](spawning.md)
 * [Moving laterally using wmi](lateral.md)
