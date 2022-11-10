@@ -21,4 +21,4 @@ As a red teamer, gaining access to legitimate credentials has benefits:
 * [Windows Credential Manager](wcm.md)
 * [Domain Controller](dc.md)
 * [Local Administrator Password Solution](laps.md)
-* [Other attacks](hashes.md)
+* [Hashes and tickets](hashes.md)
