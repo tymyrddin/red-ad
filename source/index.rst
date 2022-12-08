@@ -99,4 +99,4 @@ of the entire grove, it holds the keys to the kingdom, making it a very likely t
 .. toctree::
    :caption: Links
 
-   Red Team <https://tymyrddin.github.io/red/>
+   Red Team <https://red.tymyrddin.dev/>

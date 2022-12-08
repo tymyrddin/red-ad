@@ -78,8 +78,8 @@ html_show_copyright = False
 
 # Intersphinx
 intersphinx_mapping = {
-    "red-recon": ("https://tymyrddin.github.io/red-recon/", None),
-    "red-hurdles": ("https://tymyrddin.github.io/red-hurdles/", None),
-    "red-network": ("https://tymyrddin.github.io/red-network/", None),
+    "red-recon": ("https://red.tymyrddin.dev/projects/recon/en/latest/", None),
+    "red-hurdles": ("https://red.tymyrddin.dev/projects/fire/en/latest/", None),
+    "red-network": ("https://red.tymyrddin.dev/projects/network/en/latest/", None),
 }
 myst_url_schemes = ["http", "https", ]
