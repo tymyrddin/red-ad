@@ -3,7 +3,7 @@
 Built with [Sphinx](https://www.sphinx-doc.org) using a [theme](https://github.com/readthedocs/sphinx_rtd_theme) provided
 by [Read the Docs](https://readthedocs.org/).
 
-[![Documentation Status](https://readthedocs.org/projects/red-ad/badge/?version=latest)](https://red.tymyrddin.dev/projects/ad/en/latest/?badge=latest)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d4eb34a1-fa70-46c1-833e-f24359559ea9/deploy-status)](https://app.netlify.com/sites/rococo-twilight-6aa398/deploys)
 
 ## Requirements
 
