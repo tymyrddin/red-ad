@@ -14,22 +14,13 @@ internet. Examples:
 |:--:|
 | The user is now either granted access or denied access, authorisation is performed on the <br>Exchange server with consultation of the msg.target.com Domain Controller. |
 
-NTLM is generally considered insecure because it uses outdated cryptography that is 
-[vulnerable to several modes of attacks](red-network:docs/ad/vulns). NTLM is also vulnerable to 
-pass-the-hash and brute-force attacks.
+NTLM is generally considered insecure because it uses outdated cryptography that is vulnerable to several modes of attacks. NTLM is also vulnerable to pass-the-hash and brute-force attacks.
 
 ## Password spraying
 
-Most AD environments have account lockout configured, we won't be able to run a full brute-force attack. Instead, we 
-need to perform a password spraying attack.
+Most AD environments have account lockout configured, we won't be able to run a full brute-force attack. Instead, a password spraying attack might work. We could use tools such as Hydra to assist with the password spraying attack. The room uses a script named `ntlm_passwordspray.py`.
 
-We could use tools such as Hydra to assist with the password spraying attack. The room uses a script named 
-`ntlm_passwordspray.py`.
-
-The core function takes a suggested password and a URL to target as input and attempts to authenticate to the URL 
-with each username in the textfile. By monitoring the differences in HTTP response codes from the application, we 
-can determine if the credential pair is valid or not. If the credential pair is valid, the application responds 
-with a 200 HTTP (OK) code. If the pair is invalid, the application returns a 401 HTTP (Unauthorised) code. 
+The core function takes a suggested password and a URL to target as input and attempts to authenticate to the URL with each username in the textfile. By monitoring the differences in HTTP response codes from the application, we can determine if the credential pair is valid or not. If the credential pair is valid, the application responds with a 200 HTTP (OK) code. If the pair is invalid, the application returns a 401 HTTP (Unauthorised) code. 
 
 The parameters:
 

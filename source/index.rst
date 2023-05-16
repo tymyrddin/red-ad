@@ -13,8 +13,6 @@ of the entire grove, it holds the keys to the kingdom, making it a very likely t
    :caption: Breaching
 
    docs/breach/README.md
-   OSINT <https://red.tymyrddin.dev/projects/recon/en/latest/docs/osint/README.html>
-   Phishing <https://red.tymyrddin.dev/projects/fire/en/latest/docs/phishing/README.html>
    docs/breach/ntlm.md
    docs/breach/ldap.md
    docs/breach/relays.md
